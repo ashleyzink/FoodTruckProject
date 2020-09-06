@@ -2,14 +2,15 @@ package com.skilldistillery.foodproject;
 
 public class FoodTruck {
 	
+	//Static variable same for all FoodTruck objects
 	private static int nextId = 1000;
+	
+	//dynamic variables unique for each specific FoodTruck and don't exist until a FoodTruck is constructed.
+	//These are declared, not initialized (until a ctor is used.)
 	private int uniqueId;
 	private String truckName;
 	private String typeOfFood;
 	private double foodRating;
-	
-	public FoodTruck() {
-	}
 	
 	public FoodTruck(String truckName, String typeOfFood, double foodRating) {
 		this.uniqueId = nextId++;
@@ -18,6 +19,7 @@ public class FoodTruck {
 		this.foodRating = foodRating;
 	}
 
+	//These are all part of a FoodTruck. If a FoodTruck has no been constructed, they are not accessible. 
 	public int getUniqueId() {
 		return uniqueId;
 	}
@@ -49,7 +51,7 @@ public class FoodTruck {
 	@Override
 	public String toString() {
 		return "Truck ID#: " + uniqueId + "\nTruck name: " + truckName + 
-				"\nFood Style: " + typeOfFood + "\nFood Truck Rating: " + foodRating;
+				"\nFood Style: " + typeOfFood + "\nFood Truck Rating: " + foodRating + "\n";
 	}
 
 }
