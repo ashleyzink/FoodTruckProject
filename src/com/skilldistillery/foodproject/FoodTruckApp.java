@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class FoodTruckApp {
 
+	boolean keepGoing = true;
+
 	public static void main(String[] args) {
 		FoodTruckApp truckApp = new FoodTruckApp();
 
@@ -22,24 +24,59 @@ public class FoodTruckApp {
 //			System.out.println(trucks[i]); //Used for testing userInput. 
 			// Created method to print outside of my for loop.
 		}
+		while (truckApp.keepGoing) {
+			truckApp.printMenu(userInput, truckApp, trucks);
+		}
 
-		truckApp.printAllTrucks(trucks);
-		truckApp.getAverageFoodTruckRating(trucks);
-		truckApp.getHighestRatedTruck(trucks);
+	}
+
+	private void printMenu(Scanner userInput, FoodTruckApp truckApp, FoodTruck[] trucks) {
+		System.out.println("*~*~*~*~*  Food Truck Info At Your Fingertips  *~*~*~*~*");
+		System.out.println("\nPlease type the corresponding number from the menu below "
+				+ "\n      for the information you'd like to access");
+		System.out.println("\n\t1.) List of All Food Trucks");
+		System.out.println("\t2.) The Average Rating of All Food Trucks");
+		System.out.println("\t3.) Display of the Highest Rated Food Truck");
+		System.out.println("\t4.) Quit the Program ");
+		System.out.println("\n *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
+
+		int menuSelection = userInput.nextInt();
+
+		switch (menuSelection) {
+
+		case 1:
+			truckApp.printAllTrucks(trucks);
+			break;
+		case 2:
+			System.out.printf(
+					"------- The average rating of all your food trucks is: %.2f -------\n\n", truckApp.getAverageFoodTruckRating(trucks));
+			break;
+		case 3:
+			truckApp.getHighestRatedTruck(trucks);
+			break;
+		case 4:
+			System.out.println("Thank you for using our Food Truck App! Have a great day \u263a");
+			keepGoing = false;
+			break;
+		}
 
 	}
 
 	private void getHighestRatedTruck(FoodTruck[] trucks) {
 
 		double highestRating = 0;
-		
+		int index = 0;
 		for (int i = 0; i < trucks.length; i++) {
 			if (trucks[i] != null) {
-				double foodRating = trucks[i].getFoodRating();
-				
-						
+				if (trucks[i].getFoodRating() > highestRating) {
+					highestRating = trucks[i].getFoodRating();
+					index = i;
+
+				}
 			}
 		}
+		System.out.println(trucks[index]);
+
 	}
 
 	private double getAverageFoodTruckRating(FoodTruck[] trucks) { // TODO: Return the avg ratings to user
