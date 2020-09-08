@@ -27,7 +27,7 @@ public class FoodTruckApp {
 		while (truckApp.keepGoing) {
 			truckApp.printMenu(userInput, truckApp, trucks);
 		}
-
+		userInput.close();
 	}
 
 	private void printMenu(Scanner userInput, FoodTruckApp truckApp, FoodTruck[] trucks) {
@@ -48,8 +48,8 @@ public class FoodTruckApp {
 			truckApp.printAllTrucks(trucks);
 			break;
 		case 2:
-			System.out.printf(
-					"------- The average rating of all your food trucks is: %.2f -------\n\n", truckApp.getAverageFoodTruckRating(trucks));
+			System.out.printf("------- The average rating of all your food trucks is: %.2f -------\n\n",
+					truckApp.getAverageFoodTruckRating(trucks));
 			break;
 		case 3:
 			truckApp.getHighestRatedTruck(trucks);
@@ -58,12 +58,13 @@ public class FoodTruckApp {
 			System.out.println("Thank you for using our Food Truck App! Have a great day \u263a");
 			keepGoing = false;
 			break;
+		default:
+			break;
 		}
 
 	}
 
 	private void getHighestRatedTruck(FoodTruck[] trucks) {
-
 		double highestRating = 0;
 		int index = 0;
 		for (int i = 0; i < trucks.length; i++) {
@@ -71,7 +72,6 @@ public class FoodTruckApp {
 				if (trucks[i].getFoodRating() > highestRating) {
 					highestRating = trucks[i].getFoodRating();
 					index = i;
-
 				}
 			}
 		}
